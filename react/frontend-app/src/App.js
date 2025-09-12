@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import UserList from './UserList';
+import UserForm from './UserForm';
 
 function App() {
+  const [refresh, setRefresh] = useState(false);
+
+  // Trigger the refresh when a new user is created
+  const handleUserCreation = () => {
+    setRefresh(!refresh);  // Toggle refresh to trigger re-fetch of users
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>React and FastAPI Example</h1>
+      <UserForm onUserCreated={handleUserCreation} />
+      <UserList refresh={refresh} />
     </div>
   );
 }
